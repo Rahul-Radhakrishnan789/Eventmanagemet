@@ -22,7 +22,7 @@ dotenv.config()
 
 
 async function main() {
-  await mongoose.connect(process.env.mongoDBurl);
+  await mongoose.connect("mongodb://127.0.0.1/mongoconnection");
   console.log("db connected");
 }
 main().catch((err) => console.log(err))
