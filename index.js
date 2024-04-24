@@ -16,13 +16,13 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 app.use(morgan("dev"))
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))  
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))  
 dotenv.config()
 
 
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1/mongoconnection");
+  await mongoose.connect(process.env.mongoDBurl);
   console.log("db connected");
 }
 main().catch((err) => console.log(err))
