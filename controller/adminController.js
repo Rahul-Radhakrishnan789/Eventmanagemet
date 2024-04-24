@@ -1,5 +1,7 @@
 const eventModel = require("../model/eventSchema");
 const venueModel = require("../model/venueSchema");
+const userModel = require("../model/userSchema");
+const organizerModel = require("../model/organizerSchema");
 const fs = require("fs");
 const cloudinary = require("../cloudinary/cloudinary");
 
@@ -37,15 +39,14 @@ module.exports = {
     });
   },
   createVenue: async (req, res) => {
-
     let urls = [];
 
-    const { title, place, maximumSeats, facilities,price, mapUrl } = req.body;
+    const { title, place, maximumSeats, facilities, price, mapUrl } = req.body;
 
-    const uploader = async (path) => await cloudinary.uploads(path,"images");
+    const uploader = async (path) => await cloudinary.uploads(path, "images");
     if (req.method == "POST") {
       const files = req.files;
-      console.log("files",files)
+      console.log("files", files);
 
       for (const file of files) {
         const { path } = file;
@@ -61,10 +62,10 @@ module.exports = {
         title,
         place,
         maximumSeats,
-        Facilities:facilities.split(","),
+        Facilities: facilities.split(","),
         images: urls,
         price,
-        mapUrl
+        mapUrl,
       });
       await venue.save();
       res.status(200).json({
@@ -78,13 +79,62 @@ module.exports = {
       });
     }
   },
-  getAllVenue:async(req,res) => {
-    const allVenues = await venueModel.find({})
+  getAllVenue: async (req, res) => {
+    const allVenues = await venueModel.find({});
 
     return res.status(200).json({
-        status:'success',
-        message: "all venues fetched",
-        data: allVenues,
-      });
+      status: "success",
+      message: "all venues fetched",
+      data: allVenues,
+    });
+  },
+  getAllUsers: async (req, res) => {
+    const users = await userModel.find({});
+
+    return res.status(200).json({
+      status: "success",
+      message: "all users listed",
+      data: users,
+    });
+  },
+  getAllOrganizers: async (req, res) => {
+    const vendors = await organizerModel.find({});
+
+    return res.status(200).json({
+      status: "success",
+      message: "all vendors listed",
+      data: vendors,
+    });
+  },
+  deleteUser: async (req, res) => {
+    const userId = req.params.id;
+
+    const deleteUser = await userModel.findByIdAndDelete(userId);
+
+    if (!deleteUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({
+      status:"success",
+      message: "User deleted successfully",
+      data:deleteUser
+    });  
+  },
+
+  deleteOrganizer : async (req,res) => {
+    const organizerId = req.params.id;
+
+    const deleteOrganizer = await organizerModel.findByIdAndDelete(organizerId)
+
+    if (!deleteOrganizer) {
+      return res.status(404).json({ message: "Organizer not found" });
   }
+
+  res.status(200).json({
+    status:"success",
+    message: "Organizer deleted successfully",
+    data:deleteOrganizer
+  });
+
+}
 };

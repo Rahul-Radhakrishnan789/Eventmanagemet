@@ -15,5 +15,13 @@ router.patch("/approveevent/:id",tryCatchMiddleware(admin.approveAnEvent))
   
 router.get("/approvedevents",tryCatchMiddleware(admin.getAllApprovedEvents))
 
+router.get("/getallusers",tryCatchMiddleware(admin.getAllUsers))
+
+router.get("/getallorganizers",tryCatchMiddleware(admin.getAllOrganizers))
+
+router.delete("/deleteuser/:id",tryCatchMiddleware(admin.deleteUser))
+
+router.delete("/deleteorganizer/:id",tryCatchMiddleware(admin.deleteOrganizer))
+
 
 module.exports=router
