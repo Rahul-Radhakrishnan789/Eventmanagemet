@@ -22,7 +22,7 @@ dotenv.config()
 
 
 async function main() {
-  await mongoose.connect(process.env.mongoDBurl);
+  await mongoose.connect("mongodb://127.0.0.1:27017/eventmanagement");
   console.log("db connected");
 }
 main().catch((err) => console.log(err))
@@ -44,11 +44,11 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", (data) => {
       socket.join(data);
-      console.log(`user with ID: ${socket.id} joined room: ${data}`)
+    
   })
 
   socket.on("disconnect", () => {
-      console.log("User disconnected",socket.id)
+    
   });
 
   socket.on('send_message', async (data) => {
