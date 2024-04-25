@@ -9,6 +9,8 @@ router.post("/postevent/:id/:organizerId",upload.single("image"),tryCatchMiddlew
 
 router.get("/getallevents/:id",tryCatchMiddleware(organizer.getAlleventByOrganizer))
 
+router.get("/geteventdata/:id",tryCatchMiddleware(organizer.getEventData))
+
 
 
 module.exports=router
