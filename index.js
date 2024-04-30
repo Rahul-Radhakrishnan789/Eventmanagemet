@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 app.use(morgan("dev"))
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))  
+app.use('uploads', express.static(path.join(__dirname, 'uploads')))  
 dotenv.config()
 
 
@@ -40,7 +40,7 @@ const io = new Server(server, {
 
 
 io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
+
 
   socket.on("join_room", (data) => {
       socket.join(data);
@@ -54,8 +54,7 @@ io.on("connection", (socket) => {
   socket.on('send_message', async (data) => {
     try {
       const newMessage = new chatMessage({
-        room: data.room,
-        sender: data.author,
+        sender: data.userId,
         reciever:data.reciever,
         message: data.message,
         time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
@@ -73,13 +72,13 @@ io.on("connection", (socket) => {
   
 }); 
 
-app.get('/api/messages/:userId', async (req, res) => {
+app.get('/api/messages', async (req, res) => {
   try {
-   
-    const userId = req.params.id;
-    const messages = await chatMessage.find({userId});
+
+    const messages = await chatMessage.find({}).populate('sender');
+
     res.json(messages);
-    console.log('messages',messages)
+  
   } catch (error) {
     console.error('Error fetching messages from MongoDB:', error);
     res.status(500).json({ error: 'Internal server error' });
