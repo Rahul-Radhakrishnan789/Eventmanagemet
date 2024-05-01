@@ -11,6 +11,14 @@ router.get("/getallevents/:id",tryCatchMiddleware(organizer.getAlleventByOrganiz
 
 router.get("/geteventdata/:id",tryCatchMiddleware(organizer.getEventData))
 
+router.delete("/deleteevent/:id",tryCatchMiddleware(organizer.deleteEvent))
+
+router.put("/editevent/:id",tryCatchMiddleware(organizer.editEvent))
+
+router.delete("/deletevenue/:id",tryCatchMiddleware(organizer.deleteVenue))
+
+router.put("/editvenue/:id",tryCatchMiddleware(organizer.editVenue))
+
 
 
 module.exports=router
