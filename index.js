@@ -77,7 +77,7 @@ app.get('/api/messages', async (req, res) => {
 
     const messages = await chatMessage.find({}).populate('sender');
 
-    res.json(messages);
+    res.status(200).json({messages:messages});
   
   } catch (error) {
     console.error('Error fetching messages from MongoDB:', error);
