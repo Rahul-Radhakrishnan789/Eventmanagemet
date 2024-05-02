@@ -11,7 +11,7 @@ router.post("/commonlogin",tryCatchMiddleware(user.commonlogin))
 router.get("/getallevents",tryCatchMiddleware(user.getAllEvents))
 router.post('/paymentstart',tryCatchMiddleware(user.paymentInit))
 router.post('/paymentfinal/:id/:user',tryCatchMiddleware(user.verifyPayment))
-router.get('/fetchallbooking',tryCatchMiddleware(user.getAllBookings))
+router.get('/fetchallbooking/:id',tryCatchMiddleware(user.getAllBookings))
 router.post('/refund',tryCatchMiddleware(user.cancelOrder))
 
 

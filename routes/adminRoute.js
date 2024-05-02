@@ -23,5 +23,7 @@ router.delete("/deleteuser/:id",tryCatchMiddleware(admin.deleteUser))
 
 router.delete("/deleteorganizer/:id",tryCatchMiddleware(admin.deleteOrganizer))
 
+router.get("/fetchstatistics",tryCatchMiddleware(admin.fetchStatistics))
+
 
 module.exports=router
