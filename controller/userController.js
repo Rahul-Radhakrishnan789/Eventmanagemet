@@ -14,8 +14,8 @@ module.exports={
     getAllBookings:async(req,res) => {
 
         const userId = req.params.id
-
-        const bookings = await orderModel.find(userId).populate({
+    
+        const bookings = await orderModel.find({userId:userId}).populate({
             path: 'event',
             populate: {
               path: 'venue' 

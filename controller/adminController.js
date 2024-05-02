@@ -136,5 +136,21 @@ module.exports = {
     data:deleteOrganizer
   });
 
+},
+
+fetchStatistics: async (req,res) => {
+
+  const userNumber = await userModel.countDocuments({})
+
+  const organizerNumber = await organizerModel.countDocuments({})
+
+  const eventNumber = await eventModel.countDocuments({})
+
+  res.status(200).json({
+    status:"success",
+    message: "statistics fetched successfully",
+    data:{userNumber,organizerNumber,eventNumber}
+  });
+
 }
 };
