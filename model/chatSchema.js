@@ -1,22 +1,22 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const chatMessageSchema = new mongoose.Schema({
- sender:{
-  type: mongoose.Schema.Types.ObjectId,
-  ref:'user'
- },
- reciever:{
-  type: mongoose.Schema.Types.ObjectId,
-  ref:'organizer'
- },
- message:{
-  type:String,
- },
- time:{
-  type:String
- }
-});
+// const chatMessageSchema = new mongoose.Schema({
+//  sender:{
+//   type: mongoose.Schema.Types.ObjectId,
+//   ref:'user'
+//  },
+//  reciever:{
+//   type: mongoose.Schema.Types.ObjectId,
+//   ref:'organizer'
+//  },
+//  message:{
+//   type:String,
+//  },
+//  time:{
+//   type:String
+//  }
+// });
 
- const ChatMessage = mongoose.model("ChatMessage", chatMessageSchema);
+//  const ChatMessage = mongoose.model("ChatMessage", chatMessageSchema);
 
- module.exports = ChatMessage;
+//  module.exports = ChatMessage;

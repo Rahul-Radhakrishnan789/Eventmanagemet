@@ -13,6 +13,9 @@ const organizerSchema=new mongoose.Schema({
     password:{
         type:String,
     },
+    contactNumber:{
+        type:String,
+    },
     
     
 
