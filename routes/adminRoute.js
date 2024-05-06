@@ -25,5 +25,7 @@ router.delete("/deleteorganizer/:id",tryCatchMiddleware(admin.deleteOrganizer))
 
 router.get("/fetchstatistics",tryCatchMiddleware(admin.fetchStatistics))
 
+router.get("/getname/:id",tryCatchMiddleware(admin.fetchName))
+
 
 module.exports=router
