@@ -152,5 +152,30 @@ fetchStatistics: async (req,res) => {
     data:{userNumber,organizerNumber,eventNumber}
   });
 
-}
+},
+fetchName : async (req,res) => {
+
+  const id = req.params.id;
+  let userName, organizerName;
+
+  const user = await userModel.findById(id).populate();
+  if (user) {
+    userName = user.username; 
+  } else {
+    const organizer = await organizerModel.findById(id).populate();
+    if (organizer) {
+      organizerName = organizer.username;
+    } else {
+      return res.status(404).json({
+        status: "error",
+        message: "User or organizer not found",
+      });
+    }
+  }
+  res.status(200).json({
+    status:"success",
+    message: "name fetched successfully",
+    data:{userName,organizerName}
+  });
+},
 };
