@@ -19,6 +19,10 @@ const orderSchema=new mongoose.Schema({
     },
     razorpay_payment_id:{
         type:String
+    },
+    isCancelled:{
+        type:Boolean,
+        default:false
     }
     
 

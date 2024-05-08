@@ -22,7 +22,7 @@ dotenv.config()
 
 
 async function main() {
-  await mongoose.connect(process.env.mongoDBurl);
+  await mongoose.connect("mongodb://localhost:27017/eventmanagement");
   console.log("db connected");
 }
 main().catch((err) => console.log(err))
