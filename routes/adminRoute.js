@@ -5,9 +5,11 @@ const admin=require("../controller/adminController")
 const upload = require("../middlewares/multerMiddleware")
 
 
-router.post("/createvenue", upload.array("images",5),tryCatchMiddleware(admin.createVenue))
+router.post("/createvenue/:id", upload.array("images",5),tryCatchMiddleware(admin.createVenue))
 
-router.get("/getallvenues",tryCatchMiddleware(admin.getAllVenue))
+router.get("/getallvenues/:id",tryCatchMiddleware(admin.getAllVenue))
+
+router.get("/gettotalvenues",tryCatchMiddleware(admin.getTotalVenues))
 
 router.get("/unapprovedevents",tryCatchMiddleware(admin.getAllUnApprovedEvents))
 
@@ -26,6 +28,8 @@ router.delete("/deleteorganizer/:id",tryCatchMiddleware(admin.deleteOrganizer))
 router.get("/fetchstatistics",tryCatchMiddleware(admin.fetchStatistics))
 
 router.get("/getname/:id",tryCatchMiddleware(admin.fetchName))
+
+
 
 
 module.exports=router

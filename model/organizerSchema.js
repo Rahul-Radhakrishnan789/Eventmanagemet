@@ -17,9 +17,6 @@ const organizerSchema=new mongoose.Schema({
         type:String,
     },
     
-    
-
-
 })
 
 const organizer=mongoose.model('organizer',organizerSchema)

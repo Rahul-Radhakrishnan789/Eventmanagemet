@@ -42,6 +42,8 @@ module.exports = {
     let urls = [];
 
     const { title, place, maximumSeats, facilities, price, mapUrl } = req.body;
+    
+    const organizerId = req.params.id;
 
     const uploader = async (path) => await cloudinary.uploads(path, "images");
     if (req.method == "POST") {
@@ -66,6 +68,7 @@ module.exports = {
         images: urls,
         price,
         mapUrl,
+        createdBy:organizerId,
       });
       await venue.save();
       res.status(200).json({
@@ -80,6 +83,17 @@ module.exports = {
     }
   },
   getAllVenue: async (req, res) => {
+    const organizerId = req.params.id;
+    
+    const allVenues = await venueModel.find({createdBy:organizerId});
+
+    return res.status(200).json({
+      status: "success",
+      message: "all venues fetched",
+      data: allVenues,
+    });
+  },
+  getTotalVenues: async (req,res) => {
     const allVenues = await venueModel.find({});
 
     return res.status(200).json({
