@@ -14,7 +14,7 @@ const organizerSchema=new mongoose.Schema({
         type:String,
     },
     contactNumber:{
-        type:String,
+        type:Number,
     },
     
 })
