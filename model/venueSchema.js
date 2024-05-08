@@ -30,6 +30,10 @@ const venueSchema = new mongoose.Schema({
     },
     mapUrl:{
         type:String
+    },
+    createdBy:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "organizer",
     }
 })
 
