@@ -345,10 +345,14 @@ module.exports={
             const payment_id = req.body.paymentId
             const amount = req.body.amount
 
-            const deletedOrder = await orderModel.findOneAndDelete({ razorpay_payment_id: payment_id });
+            const deletedOrder = await orderModel.findOne({ razorpay_payment_id: payment_id });
             if (!deletedOrder) {
                 return res.status(404).json({ error: 'Order not found.' });
             }
+
+            deletedOrder.isCancelled = true
+            deletedOrder.save()
+            
         const razorpay = new Razorpay({
             key_id: process.env.RAZORPAY_KEY_ID,
             key_secret: process.env.RAZORPAY_KEY_SECRET,

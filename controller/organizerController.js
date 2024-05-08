@@ -65,11 +65,25 @@ module.exports = {
   getEventData: async (req, res) => {
     const eventId = req.params.id;
 
-    const orders = await orderModel.find({ event: eventId });
+    const orders = await orderModel.find({ event: eventId  });
 
       
-       const totalAmount = orders.reduce((acc, order) => acc + order.totalAmount, 0);
-       const totalTickets = orders.reduce((acc, order) => acc + order.totalTickets, 0);
+      //  const totalAmount = orders.reduce((acc, order) => acc + order.totalAmount, 0);
+      //  const totalTickets = orders.reduce((acc, order) => acc + order.totalTickets, 0);
+
+      const totalAmount = orders.reduce((acc, order) => {
+        if (!order.isCancelled) {
+            return acc + order.totalAmount;
+        }
+        return acc;
+    }, 0);
+    
+    const totalTickets = orders.reduce((acc, order) => {
+        if (!order.isCancelled) {
+            return acc + order.totalTickets;
+        }
+        return acc;
+    }, 0);
 
       
        const populatedOrders = await orderModel.populate(orders, { path: 'userId', select: 'username email' });
