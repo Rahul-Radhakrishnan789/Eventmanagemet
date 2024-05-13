@@ -57,7 +57,7 @@ module.exports = {
 
         urls.push(newPath);
 
-        fs.unlinkSync(path);
+        // fs.unlinkSync(path);
       }
 
       const venue = new venueModel({

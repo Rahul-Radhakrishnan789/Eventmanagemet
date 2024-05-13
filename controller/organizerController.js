@@ -27,7 +27,7 @@ module.exports = {
 
       url = newPath;
 
-      fs.unlinkSync(path);
+      // fs.unlinkSync(path);
 
       const event = new eventModel({
         title,
